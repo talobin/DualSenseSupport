@@ -29,7 +29,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.ComboIndex = new System.Windows.Forms.ComboBox();
+            this.joystickComboIndex = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
             this.button1 = new System.Windows.Forms.Button();
@@ -41,13 +41,13 @@
             this.comboLeftMode = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
             this.labelPlayerNumber = new System.Windows.Forms.Label();
-            this.trackBar1 = new System.Windows.Forms.TrackBar();
-            this.trackBar2 = new System.Windows.Forms.TrackBar();
+            this.playerNumberTrackBar = new System.Windows.Forms.TrackBar();
+            this.brightnessTrackBar = new System.Windows.Forms.TrackBar();
             this.label3 = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.setModeComboBox = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
+            this.pulseModeComboBox = new System.Windows.Forms.ComboBox();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.l_n_7 = new System.Windows.Forms.NumericUpDown();
@@ -82,13 +82,13 @@
             this.comboRightMode = new System.Windows.Forms.ComboBox();
             this.label14 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
-            this.trackBar3 = new System.Windows.Forms.TrackBar();
+            this.overallMotorsTrackBar = new System.Windows.Forms.TrackBar();
             ((System.ComponentModel.ISupportInitialize) (this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize) (this.trackR)).BeginInit();
             ((System.ComponentModel.ISupportInitialize) (this.trackG)).BeginInit();
             ((System.ComponentModel.ISupportInitialize) (this.trackB)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize) (this.trackBar1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize) (this.trackBar2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize) (this.playerNumberTrackBar)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize) (this.brightnessTrackBar)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize) (this.l_n_7)).BeginInit();
@@ -120,17 +120,17 @@
             ((System.ComponentModel.ISupportInitialize) (this.r_v_3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize) (this.r_v_2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize) (this.r_v_1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize) (this.trackBar3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize) (this.overallMotorsTrackBar)).BeginInit();
             this.SuspendLayout();
             // 
             // ComboIndex
             // 
-            this.ComboIndex.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.ComboIndex.FormattingEnabled = true;
-            this.ComboIndex.Location = new System.Drawing.Point(12, 35);
-            this.ComboIndex.Name = "ComboIndex";
-            this.ComboIndex.Size = new System.Drawing.Size(121, 21);
-            this.ComboIndex.TabIndex = 0;
+            this.joystickComboIndex.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.joystickComboIndex.FormattingEnabled = true;
+            this.joystickComboIndex.Location = new System.Drawing.Point(12, 35);
+            this.joystickComboIndex.Name = "ComboIndex";
+            this.joystickComboIndex.Size = new System.Drawing.Size(121, 21);
+            this.joystickComboIndex.TabIndex = 0;
             // 
             // label1
             // 
@@ -221,21 +221,21 @@
             // 
             // trackBar1
             // 
-            this.trackBar1.Location = new System.Drawing.Point(12, 180);
-            this.trackBar1.Maximum = 31;
-            this.trackBar1.Name = "trackBar1";
-            this.trackBar1.Size = new System.Drawing.Size(379, 45);
-            this.trackBar1.TabIndex = 10;
-            this.trackBar1.Scroll += new System.EventHandler(this.trackBar1_Scroll);
+            this.playerNumberTrackBar.Location = new System.Drawing.Point(12, 180);
+            this.playerNumberTrackBar.Maximum = 31;
+            this.playerNumberTrackBar.Name = "trackBar1";
+            this.playerNumberTrackBar.Size = new System.Drawing.Size(379, 45);
+            this.playerNumberTrackBar.TabIndex = 10;
+            this.playerNumberTrackBar.Scroll += new System.EventHandler(this.playerNumberTrackBar_Scroll);
             // 
             // trackBar2
             // 
-            this.trackBar2.Location = new System.Drawing.Point(12, 239);
-            this.trackBar2.Maximum = 2;
-            this.trackBar2.Name = "trackBar2";
-            this.trackBar2.Size = new System.Drawing.Size(379, 45);
-            this.trackBar2.TabIndex = 12;
-            this.trackBar2.Scroll += new System.EventHandler(this.trackBar2_Scroll);
+            this.brightnessTrackBar.Location = new System.Drawing.Point(12, 239);
+            this.brightnessTrackBar.Maximum = 2;
+            this.brightnessTrackBar.Name = "trackBar2";
+            this.brightnessTrackBar.Size = new System.Drawing.Size(379, 45);
+            this.brightnessTrackBar.TabIndex = 12;
+            this.brightnessTrackBar.Scroll += new System.EventHandler(this.brightnessTrackBar_Scroll);
             // 
             // label3
             // 
@@ -247,14 +247,14 @@
             // 
             // comboBox1
             // 
-            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] {"None", "Set Player Led Brightness", "Uninterruptable Blue LED Pulse", "Both"});
-            this.comboBox1.Location = new System.Drawing.Point(424, 180);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(352, 21);
-            this.comboBox1.TabIndex = 13;
-            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
+            this.setModeComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.setModeComboBox.FormattingEnabled = true;
+            this.setModeComboBox.Items.AddRange(new object[] {"None", "Set Player Led Brightness", "Uninterruptable Blue LED Pulse", "Both"});
+            this.setModeComboBox.Location = new System.Drawing.Point(424, 180);
+            this.setModeComboBox.Name = "comboBox1";
+            this.setModeComboBox.Size = new System.Drawing.Size(352, 21);
+            this.setModeComboBox.TabIndex = 13;
+            this.setModeComboBox.SelectedIndexChanged += new System.EventHandler(this.setModeComboBox_SelectedIndexChanged);
             // 
             // label4
             // 
@@ -274,14 +274,14 @@
             // 
             // comboBox2
             // 
-            this.comboBox2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Items.AddRange(new object[] {"None", "Fade to Blue", "Fade Out"});
-            this.comboBox2.Location = new System.Drawing.Point(424, 239);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(352, 21);
-            this.comboBox2.TabIndex = 0;
-            this.comboBox2.SelectedIndexChanged += new System.EventHandler(this.comboBox2_SelectedIndexChanged);
+            this.pulseModeComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.pulseModeComboBox.FormattingEnabled = true;
+            this.pulseModeComboBox.Items.AddRange(new object[] {"None", "Fade to Blue", "Fade Out"});
+            this.pulseModeComboBox.Location = new System.Drawing.Point(424, 239);
+            this.pulseModeComboBox.Name = "comboBox2";
+            this.pulseModeComboBox.Size = new System.Drawing.Size(352, 21);
+            this.pulseModeComboBox.TabIndex = 0;
+            this.pulseModeComboBox.SelectedIndexChanged += new System.EventHandler(this.pulseModeComboBox_SelectedIndexChanged);
             // 
             // tabControl1
             // 
@@ -639,28 +639,28 @@
             // 
             // trackBar3
             // 
-            this.trackBar3.Location = new System.Drawing.Point(18, 608);
-            this.trackBar3.Maximum = 7;
-            this.trackBar3.Name = "trackBar3";
-            this.trackBar3.Size = new System.Drawing.Size(268, 45);
-            this.trackBar3.TabIndex = 18;
-            this.trackBar3.Scroll += new System.EventHandler(this.trackBar3_Scroll_1);
+            this.overallMotorsTrackBar.Location = new System.Drawing.Point(18, 608);
+            this.overallMotorsTrackBar.Maximum = 7;
+            this.overallMotorsTrackBar.Name = "trackBar3";
+            this.overallMotorsTrackBar.Size = new System.Drawing.Size(268, 45);
+            this.overallMotorsTrackBar.TabIndex = 18;
+            this.overallMotorsTrackBar.Scroll += new System.EventHandler(this.overallMotorsTrackBar_Scroll_1);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 665);
-            this.Controls.Add(this.trackBar3);
+            this.Controls.Add(this.overallMotorsTrackBar);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.tabControl1);
-            this.Controls.Add(this.comboBox2);
+            this.Controls.Add(this.pulseModeComboBox);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
-            this.Controls.Add(this.comboBox1);
-            this.Controls.Add(this.trackBar2);
+            this.Controls.Add(this.setModeComboBox);
+            this.Controls.Add(this.brightnessTrackBar);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.trackBar1);
+            this.Controls.Add(this.playerNumberTrackBar);
             this.Controls.Add(this.labelPlayerNumber);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.trackB);
@@ -669,7 +669,7 @@
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.ComboIndex);
+            this.Controls.Add(this.joystickComboIndex);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.Name = "Form1";
@@ -679,8 +679,8 @@
             ((System.ComponentModel.ISupportInitialize) (this.trackR)).EndInit();
             ((System.ComponentModel.ISupportInitialize) (this.trackG)).EndInit();
             ((System.ComponentModel.ISupportInitialize) (this.trackB)).EndInit();
-            ((System.ComponentModel.ISupportInitialize) (this.trackBar1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize) (this.trackBar2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize) (this.playerNumberTrackBar)).EndInit();
+            ((System.ComponentModel.ISupportInitialize) (this.brightnessTrackBar)).EndInit();
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
@@ -714,16 +714,16 @@
             ((System.ComponentModel.ISupportInitialize) (this.r_v_3)).EndInit();
             ((System.ComponentModel.ISupportInitialize) (this.r_v_2)).EndInit();
             ((System.ComponentModel.ISupportInitialize) (this.r_v_1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize) (this.trackBar3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize) (this.overallMotorsTrackBar)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
         }
 
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.ColorDialog colorDialog1;
-        private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.ComboBox comboBox2;
-        private System.Windows.Forms.ComboBox ComboIndex;
+        private System.Windows.Forms.ComboBox setModeComboBox;
+        private System.Windows.Forms.ComboBox pulseModeComboBox;
+        private System.Windows.Forms.ComboBox joystickComboIndex;
         private System.Windows.Forms.ComboBox comboLeftMode;
         private System.Windows.Forms.ComboBox comboRightMode;
         private System.Windows.Forms.NumericUpDown l_n_1;
@@ -768,9 +768,9 @@
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.TrackBar trackB;
-        private System.Windows.Forms.TrackBar trackBar1;
-        private System.Windows.Forms.TrackBar trackBar2;
-        private System.Windows.Forms.TrackBar trackBar3;
+        private System.Windows.Forms.TrackBar playerNumberTrackBar;
+        private System.Windows.Forms.TrackBar brightnessTrackBar;
+        private System.Windows.Forms.TrackBar overallMotorsTrackBar;
         private System.Windows.Forms.TrackBar trackG;
         private System.Windows.Forms.TrackBar trackR;
 

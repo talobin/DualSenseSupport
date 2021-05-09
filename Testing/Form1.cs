@@ -13,6 +13,7 @@ using System.Windows.Forms;
 using DSProject;
 using DualSenseSupport;
 using Microsoft.SqlServer.Server;
+using System.Configuration;
 
 namespace Testing
 {
@@ -30,48 +31,126 @@ namespace Testing
             DualSenseSupport.Devices.Init();
 
 
-            ComboIndex.DisplayMember = "Text";
-            ComboIndex.ValueMember = "Value";
+            joystickComboIndex.DisplayMember = "Text";
+            joystickComboIndex.ValueMember = "Value";
             var list = new List<object>();
             for (int i = 0; i < DualSenseSupport.Devices.GetDeviceCount(); i++)
             {
                 list.Add(new {Text = $"Input #{i}", Value = i});
             }
 
-            ComboIndex.DataSource = list;
-            comboBox1.SelectedIndex = 0;
-            comboBox2.SelectedIndex = 0;
+            joystickComboIndex.DataSource = list;
+            //setModeComboBox.SelectedIndex = 0;
+            //pulseModeComboBox.SelectedIndex = 0;
 
-            var listModes = new List<object>();
-            listModes.Add(new {Text = "Off", Value = DsTrigger.Modes.Off});
-            listModes.Add(new {Text = "Rigid", Value = DsTrigger.Modes.Rigid});
-            listModes.Add(new {Text = "Pulse", Value = DsTrigger.Modes.Pulse});
-            listModes.Add(new {Text = "Rigid + Extra1", Value = DsTrigger.Modes.Rigid_A});
-            listModes.Add(new {Text = "Rigid + Extra2", Value = DsTrigger.Modes.Rigid_B});
-            listModes.Add(new {Text = "Rigid + Extra1 + Extra 2", Value = DsTrigger.Modes.Rigid_AB});
-            listModes.Add(new {Text = "Pulse + Extra1 ", Value = DsTrigger.Modes.Pulse_A});
-            listModes.Add(new {Text = "Pulse + Extra2 ", Value = DsTrigger.Modes.Pulse_B});
-            listModes.Add(new {Text = "Pulse + Extra1 + Extra 2 ", Value = DsTrigger.Modes.Pulse_AB});
-            listModes.Add(new {Text = "GameCube ", Value = DsTrigger.Modes.GameCube});
-            listModes.Add(new {Text = "Calibration ", Value = DsTrigger.Modes.Calibration});
-            var listModes2 = new List<object>();
-            listModes2.Add(new {Text = "Off", Value = DsTrigger.Modes.Off});
-            listModes2.Add(new {Text = "Rigid", Value = DsTrigger.Modes.Rigid});
-            listModes2.Add(new {Text = "Pulse", Value = DsTrigger.Modes.Pulse});
-            listModes2.Add(new {Text = "Rigid + Extra1", Value = DsTrigger.Modes.Rigid_A});
-            listModes2.Add(new {Text = "Rigid + Extra2", Value = DsTrigger.Modes.Rigid_B});
-            listModes2.Add(new {Text = "Rigid + Extra1 + Extra 2", Value = DsTrigger.Modes.Rigid_AB});
-            listModes2.Add(new {Text = "Pulse + Extra1 ", Value = DsTrigger.Modes.Pulse_A});
-            listModes2.Add(new {Text = "Pulse + Extra2 ", Value = DsTrigger.Modes.Pulse_B});
-            listModes2.Add(new {Text = "Pulse + Extra1 + Extra 2 ", Value = DsTrigger.Modes.Pulse_AB});
-            listModes2.Add(new {Text = "GameCube ", Value = DsTrigger.Modes.GameCube});
-            listModes2.Add(new {Text = "Calibration ", Value = DsTrigger.Modes.Calibration});
+
+
+
+
+            var leftTriggerModeList = new BindingList<object>();
+            leftTriggerModeList.Add(new {Text = "Off", Value = DsTrigger.Modes.Off});
+            leftTriggerModeList.Add(new {Text = "Rigid", Value = DsTrigger.Modes.Rigid});
+            leftTriggerModeList.Add(new {Text = "Pulse", Value = DsTrigger.Modes.Pulse});
+            leftTriggerModeList.Add(new {Text = "Rigid + Extra1", Value = DsTrigger.Modes.Rigid_A});
+            leftTriggerModeList.Add(new {Text = "Rigid + Extra2", Value = DsTrigger.Modes.Rigid_B});
+            leftTriggerModeList.Add(new {Text = "Rigid + Extra1 + Extra 2", Value = DsTrigger.Modes.Rigid_AB});
+            leftTriggerModeList.Add(new {Text = "Pulse + Extra1 ", Value = DsTrigger.Modes.Pulse_A});
+            leftTriggerModeList.Add(new {Text = "Pulse + Extra2 ", Value = DsTrigger.Modes.Pulse_B});
+            leftTriggerModeList.Add(new {Text = "Pulse + Extra1 + Extra 2 ", Value = DsTrigger.Modes.Pulse_AB});
+            leftTriggerModeList.Add(new {Text = "GameCube ", Value = DsTrigger.Modes.GameCube});
+            leftTriggerModeList.Add(new {Text = "Calibration ", Value = DsTrigger.Modes.Calibration});
+            var rightTriggerModeList = new List<object>();
+            rightTriggerModeList.Add(new {Text = "Off", Value = DsTrigger.Modes.Off});
+            rightTriggerModeList.Add(new {Text = "Rigid", Value = DsTrigger.Modes.Rigid});
+            rightTriggerModeList.Add(new {Text = "Pulse", Value = DsTrigger.Modes.Pulse});
+            rightTriggerModeList.Add(new {Text = "Rigid + Extra1", Value = DsTrigger.Modes.Rigid_A});
+            rightTriggerModeList.Add(new {Text = "Rigid + Extra2", Value = DsTrigger.Modes.Rigid_B});
+            rightTriggerModeList.Add(new {Text = "Rigid + Extra1 + Extra 2", Value = DsTrigger.Modes.Rigid_AB});
+            rightTriggerModeList.Add(new {Text = "Pulse + Extra1 ", Value = DsTrigger.Modes.Pulse_A});
+            rightTriggerModeList.Add(new {Text = "Pulse + Extra2 ", Value = DsTrigger.Modes.Pulse_B});
+            rightTriggerModeList.Add(new {Text = "Pulse + Extra1 + Extra 2 ", Value = DsTrigger.Modes.Pulse_AB});
+            rightTriggerModeList.Add(new {Text = "GameCube ", Value = DsTrigger.Modes.GameCube});
+            rightTriggerModeList.Add(new {Text = "Calibration ", Value = DsTrigger.Modes.Calibration});
             comboLeftMode.DisplayMember = "Text";
             comboLeftMode.ValueMember = "Value";
-            comboLeftMode.DataSource = listModes;
+            comboLeftMode.DataSource = leftTriggerModeList;
             comboRightMode.DisplayMember = "Text";
             comboRightMode.ValueMember = "Value";
-            comboRightMode.DataSource = listModes2;
+            comboRightMode.DataSource = rightTriggerModeList;
+            
+            // Load Config From File
+            loadFromConfigFile();
+
+        }
+
+        /**
+         * Function to load all settings from App.config file
+         * Applies all the config to the form
+         **/
+        private void loadFromConfigFile()
+        {
+            // LeftTrigger Settings
+            string leftTriggerMode = ConfigurationManager.AppSettings["leftTriggerMode"];
+            comboLeftMode.SelectedIndex = Int32.Parse(leftTriggerMode);
+            string lv1 = ConfigurationManager.AppSettings["l_v_1"];
+            l_v_1.Value = Int32.Parse(lv1);
+            string lv2 = ConfigurationManager.AppSettings["l_v_2"];
+            l_v_2.Value = Int32.Parse(lv2);
+            string lv3 = ConfigurationManager.AppSettings["l_v_3"];
+            l_v_3.Value = Int32.Parse(lv3);
+            string lv4 = ConfigurationManager.AppSettings["l_v_4"];
+            l_v_4.Value = Int32.Parse(lv4);
+            string lv5 = ConfigurationManager.AppSettings["l_v_5"];
+            l_v_5.Value = Int32.Parse(lv5);
+            string lv6 = ConfigurationManager.AppSettings["l_v_6"];
+            l_v_6.Value = Int32.Parse(lv6);
+            string lv7 = ConfigurationManager.AppSettings["l_v_7"];
+            l_v_7.Value = Int32.Parse(lv7);
+
+            // RightTrigger Settings
+            string rightTriggerMode = ConfigurationManager.AppSettings["rightTriggerMode"];
+            comboRightMode.SelectedIndex = Int32.Parse(rightTriggerMode);
+            string rv1 = ConfigurationManager.AppSettings["r_v_1"];
+            r_v_1.Value = Int32.Parse(rv1);
+            string rv2 = ConfigurationManager.AppSettings["r_v_2"];
+            r_v_2.Value = Int32.Parse(rv2);
+            string rv3 = ConfigurationManager.AppSettings["r_v_3"];
+            r_v_3.Value = Int32.Parse(rv3);
+            string rv4 = ConfigurationManager.AppSettings["r_v_4"];
+            r_v_4.Value = Int32.Parse(rv4);
+            string rv5 = ConfigurationManager.AppSettings["r_v_5"];
+            r_v_5.Value = Int32.Parse(rv5);
+            string rv6 = ConfigurationManager.AppSettings["r_v_6"];
+            r_v_6.Value = Int32.Parse(rv6);
+            string rv7 = ConfigurationManager.AppSettings["r_v_7"];
+            r_v_7.Value = Int32.Parse(rv7);
+
+            // Color Settings
+            string setMode = ConfigurationManager.AppSettings["setMode"];
+            setModeComboBox.SelectedIndex = Int32.Parse(setMode);
+            string pulseMode = ConfigurationManager.AppSettings["pulseMode"];
+            pulseModeComboBox.SelectedIndex = Int32.Parse(pulseMode);
+
+            // LEDs Settings
+            string playerNumber = ConfigurationManager.AppSettings["playerNumber"];
+            playerNumberTrackBar.Value = Int32.Parse(playerNumber);
+            labelPlayerNumber.Text = playerNumber;
+            string brightness = ConfigurationManager.AppSettings["brightness"];
+            brightnessTrackBar.Value = Int32.Parse(brightness);
+
+            // Motors
+            string overallMotors = ConfigurationManager.AppSettings["overallMotors"];
+            overallMotorsTrackBar.Value = Int32.Parse(overallMotors);
+
+            // Colors
+
+            string red = ConfigurationManager.AppSettings["red"];
+            trackR.Value = Int32.Parse(red);
+            string green = ConfigurationManager.AppSettings["green"];
+            trackG.Value = Int32.Parse(green);
+            string blue = ConfigurationManager.AppSettings["blue"];
+            trackB.Value = Int32.Parse(blue);
+            ChangeImage();
         }
 
         [DllImport("kernel32.dll", SetLastError = true)]
@@ -84,14 +163,17 @@ namespace Testing
             if (result == DialogResult.OK)
             {
                 if (SelectedDevice().HasValue)
+                {
                     Devices.GetDevice(SelectedDevice().Value)
                         .SetColor(colorDialog1.Color);
+                    ChangeImageFromSelector();
+                }
             }
         }
 
         private int? SelectedDevice()
         {
-            return (int?) ComboIndex.SelectedValue;
+            return (int?) joystickComboIndex.SelectedValue;
         }
 
         private void trackR_Scroll(object sender, EventArgs e)
@@ -102,12 +184,25 @@ namespace Testing
             ChangeImage();
         }
 
+        private void ChangeImageFromSelector()
+        {
+            trackR.Value = colorDialog1.Color.R;
+            trackG.Value = colorDialog1.Color.G;
+            trackB.Value = colorDialog1.Color.B;
+            ChangeImage();
+        }
+
         private void ChangeImage()
         {
             pictureBox1.BackColor = Color.FromArgb(trackR.Value, trackG.Value, trackB.Value);
             if (SelectedDevice().HasValue)
                 Devices.GetDevice(SelectedDevice().Value)
                     .SetColor(pictureBox1.BackColor);
+
+            // Save to Config File
+            saveToConfigFile("red", trackR.Value);
+            saveToConfigFile("green", trackG.Value);
+            saveToConfigFile("blue", trackB.Value);
         }
 
         private void trackG_Scroll(object sender, EventArgs e)
@@ -126,63 +221,84 @@ namespace Testing
             ChangeImage();
         }
 
-        private void trackBar1_Scroll(object sender, EventArgs e)
+        private void playerNumberTrackBar_Scroll(object sender, EventArgs e)
         {
-            labelPlayerNumber.Text = trackBar1.Value.ToString();
+            labelPlayerNumber.Text = playerNumberTrackBar.Value.ToString();
             if (SelectedDevice().HasValue)
                 Devices.GetDevice(SelectedDevice().Value)
-                    .SetPlayerNumber(trackBar1.Value);
+                    .SetPlayerNumber(playerNumberTrackBar.Value);
+
+            //Save to Config
+            saveToConfigFile("playerNumber", playerNumberTrackBar.Value);
         }
 
-        private void trackBar2_Scroll(object sender, EventArgs e)
+        private void brightnessTrackBar_Scroll(object sender, EventArgs e)
         {
             if (SelectedDevice().HasValue)
                 Devices.GetDevice(SelectedDevice().Value)
-                    .SetLightBrightness(trackBar2.Value);
+                    .SetLightBrightness(brightnessTrackBar.Value);
+
+            //Save to Config
+            saveToConfigFile("brightness", brightnessTrackBar.Value);
         }
 
 
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        private void setModeComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (comboBox1.SelectedIndex == 0)
+            if (setModeComboBox.SelectedIndex == 0)
             {
                 if (SelectedDevice().HasValue)
                     Devices.GetDevice(SelectedDevice().Value)
                         .SetLedMode(DSLight.LedOptions.None);
             }
 
-            if (comboBox1.SelectedIndex == 1)
+            if (setModeComboBox.SelectedIndex == 1)
             {
                 if (SelectedDevice().HasValue)
                     Devices.GetDevice(SelectedDevice().Value)
                         .SetLedMode(DSLight.LedOptions.PlayerLedBrightnes);
             }
 
-            if (comboBox1.SelectedIndex == 2)
+            if (setModeComboBox.SelectedIndex == 2)
             {
                 if (SelectedDevice().HasValue)
                     Devices.GetDevice(SelectedDevice().Value)
                         .SetLedMode(DSLight.LedOptions.UninterrumpableLed);
             }
 
-            if (comboBox1.SelectedIndex == 3)
+            if (setModeComboBox.SelectedIndex == 3)
             {
                 if (SelectedDevice().HasValue)
                     Devices.GetDevice(SelectedDevice().Value)
                         .SetLedMode(DSLight.LedOptions.Both);
             }
+
+            //Save to Config File
+            saveToConfigFile("setMode", setModeComboBox.SelectedIndex);
+
         }
 
-        private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
+        /**
+         * Helper function to save any int value to App.config
+         **/
+        private void saveToConfigFile(String key,int value)
         {
-            if (comboBox1.SelectedIndex == 0)
+            Configuration config = ConfigurationManager.OpenExeConfiguration(Application.ExecutablePath);
+            config.AppSettings.Settings.Remove(key);
+            config.AppSettings.Settings.Add(key, value.ToString());
+            config.Save(ConfigurationSaveMode.Modified);
+        }
+
+        private void pulseModeComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (pulseModeComboBox.SelectedIndex == 0)
             {
                 if (SelectedDevice().HasValue)
                     Devices.GetDevice(SelectedDevice().Value)
                         .SetPulseMode(DSLight.PulseOptions.None);
             }
 
-            if (comboBox1.SelectedIndex == 1)
+            if (pulseModeComboBox.SelectedIndex == 1)
             {
                 trackB.Value=0;
                 trackR.Value=0;
@@ -192,7 +308,7 @@ namespace Testing
                         .SetPulseMode(DSLight.PulseOptions.FadeBlue);
             }
 
-            if (comboBox1.SelectedIndex == 2)
+            if (pulseModeComboBox.SelectedIndex == 2)
             {
                 trackB.Value=0;
                 trackR.Value=0;
@@ -201,6 +317,9 @@ namespace Testing
                     Devices.GetDevice(SelectedDevice().Value)
                         .SetPulseMode(DSLight.PulseOptions.FadeOut);
             }
+
+            //Save to Config File
+            saveToConfigFile("pulseMode", pulseModeComboBox.SelectedIndex);
         }
 
         private void comboLeftMode_SelectedIndexChanged(object sender, EventArgs e)
@@ -245,6 +364,29 @@ namespace Testing
                             l_v_6.Value,
                             l_v_7.Value
                         ));
+
+            //Save config to file
+            Configuration config = ConfigurationManager.OpenExeConfiguration(Application.ExecutablePath);
+            config.AppSettings.Settings.Remove("leftTriggerMode");
+            config.AppSettings.Settings.Add("leftTriggerMode", comboLeftMode.SelectedIndex.ToString());
+            config.Save(ConfigurationSaveMode.Modified);
+            config.AppSettings.Settings.Remove("l_v_1");
+            config.AppSettings.Settings.Add("l_v_1", l_v_1.Value.ToString());
+            config.AppSettings.Settings.Remove("l_v_2");
+            config.AppSettings.Settings.Add("l_v_2", l_v_2.Value.ToString());
+            config.AppSettings.Settings.Remove("l_v_3");
+            config.AppSettings.Settings.Add("l_v_3", l_v_3.Value.ToString());
+            config.AppSettings.Settings.Remove("l_v_4");
+            config.AppSettings.Settings.Add("l_v_4", l_v_4.Value.ToString());
+            config.AppSettings.Settings.Remove("l_v_5");
+            config.AppSettings.Settings.Add("l_v_5", l_v_5.Value.ToString());
+            config.AppSettings.Settings.Remove("l_v_6");
+            config.AppSettings.Settings.Add("l_v_6", l_v_6.Value.ToString());
+            config.AppSettings.Settings.Remove("l_v_7");
+            config.AppSettings.Settings.Add("l_v_7", l_v_7.Value.ToString());
+            config.Save(ConfigurationSaveMode.Modified);
+
+
         }
 
         private void l_v_2_Scroll(object sender, EventArgs e)
@@ -306,7 +448,7 @@ namespace Testing
                 Devices.GetDevice(SelectedDevice().Value)
                     .SetTriggerRight(
                         new DsTrigger(
-                            (DsTrigger.Modes) comboRightMode.SelectedValue,
+                            (DsTrigger.Modes)comboRightMode.SelectedValue,
                             r_v_1.Value,
                             r_v_2.Value,
                             r_v_3.Value,
@@ -315,6 +457,26 @@ namespace Testing
                             r_v_6.Value,
                             r_v_7.Value
                         ));
+
+            //Save config to file
+            Configuration config = ConfigurationManager.OpenExeConfiguration(Application.ExecutablePath);
+            config.AppSettings.Settings.Remove("rightTriggerMode");
+            config.AppSettings.Settings.Add("rightTriggerMode", comboRightMode.SelectedIndex.ToString());
+            config.AppSettings.Settings.Remove("r_v_1");
+            config.AppSettings.Settings.Add("r_v_1", r_v_1.Value.ToString());
+            config.AppSettings.Settings.Remove("r_v_2");
+            config.AppSettings.Settings.Add("r_v_2", r_v_2.Value.ToString());
+            config.AppSettings.Settings.Remove("r_v_3");
+            config.AppSettings.Settings.Add("r_v_3", r_v_3.Value.ToString());
+            config.AppSettings.Settings.Remove("r_v_4");
+            config.AppSettings.Settings.Add("r_v_4", r_v_4.Value.ToString());
+            config.AppSettings.Settings.Remove("r_v_5");
+            config.AppSettings.Settings.Add("r_v_5", r_v_5.Value.ToString());
+            config.AppSettings.Settings.Remove("r_v_6");
+            config.AppSettings.Settings.Add("r_v_6", r_v_6.Value.ToString());
+            config.AppSettings.Settings.Remove("r_v_7");
+            config.AppSettings.Settings.Add("r_v_7", r_v_7.Value.ToString());
+            config.Save(ConfigurationSaveMode.Modified);
         }
 
         private void r_v_1_Scroll(object sender, EventArgs e)
@@ -353,15 +515,14 @@ namespace Testing
             UpdateRightTrigger();
         }
 
-        private void trackBar3_Scroll(object sender, EventArgs e)
-        {
-        }
-
-        private void trackBar3_Scroll_1(object sender, EventArgs e)
+        private void overallMotorsTrackBar_Scroll_1(object sender, EventArgs e)
         {
             if (SelectedDevice().HasValue)
                 Devices.GetDevice(SelectedDevice().Value)
-                    .SetOveralMotors(trackBar3.Value);
+                    .SetOveralMotors(overallMotorsTrackBar.Value);
+
+            //Save to Config File
+            saveToConfigFile("overallMotors", overallMotorsTrackBar.Value);
         }
 
         private bool onChangeTrigger = false;
